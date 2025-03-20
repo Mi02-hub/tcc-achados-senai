@@ -30,11 +30,26 @@ public class LoginService {
     
         return new LoginDTO(login);
     }
-    public LoginDTO atualizar(long id, LoginDTO dto) {
-    	Optional<LoginDTO> login = repo.findById(id);
-    	if (LoginDTO.isEmpty()) {
-    		throw new RuntimeException("Usuário ")
-    		
+   
+    public LoginDTO atualizar(Long id, LoginDTO dto) {
+    	Optional<Login> Login = repo.findById(id);
+    	if (Login.isEmpty()) {
+    		throw new RuntimeException("Usuário não encontrado");
     	}
+    	
+    	Login login = Login.get();
+    	login.setEmail(dto.getEmail());
+    	login.setSenha(dto.getSenha());;
+    	login = repo.save(login);
+    	
+    	return new LoginDTO(login);
+    } 
+    
+    public void deletar (long id) {
+    	Optional<Login> login = repo.findById(id);
+    	if (login.isEmpty()) {
+    		throw new RuntimeException("Usuário não encontrado");
+    	}
+    	repo.delete(login.get());
     }
 }

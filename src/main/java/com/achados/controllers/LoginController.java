@@ -10,31 +10,31 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.achados.dto.UsuarioDTO;
-import com.achados.entities.Usuario;
-import com.achados.repositories.UsuarioRepository;
-import com.achados.services.UsuarioService;
+import com.achados.dto.LoginDTO;
+import com.achados.entities.Login;
+import com.achados.repositories.LoginRepository;
+import com.achados.services.LoginService;
 
 @RestController
-@RequestMapping(value = "/user")
-public class UsuarioController {
+@RequestMapping(value = "/login")
+public class LoginController {
 	
 	@Autowired
-	private UsuarioService service;
+	private LoginService service;
 	
 	@GetMapping
-	public ResponseEntity<List<UsuarioDTO>> buscar() {
+	public ResponseEntity<List<LoginDTO>> buscar() {
 		return ResponseEntity.ok(service.buscarTodos());
 	}
 	
-   @Autowired
-   private UsuarioRepository userRepo;
-   
-   @PostMapping
-   public ResponseEntity<Usuario> createUsuario(@RequestBody Usuario user){
-	   Usuario savedUser = userRepo.save(user);
-	   
-	   return ResponseEntity.status(201).body(savedUser);
-   }
+	@Autowired
+	private LoginRepository loginRepo;
 	
+	@PostMapping
+	public ResponseEntity<Login> createLogin (@RequestBody Login login){ 
+		Login savedLogin = loginRepo.save(login);
+		
+		return ResponseEntity.status(201).body(savedLogin);
+	}
+
 }
