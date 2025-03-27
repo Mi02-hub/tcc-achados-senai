@@ -38,7 +38,7 @@ public class CadastroUsuario {
 		}
 
 		public CadastroUsuario(Long id, String nome, String sobrenome, String email, String telefone, String imgUrl,
-				com.achados.entities.Login login) {
+				Login login) {
 			
 			this.id = id;
 			this.nome = nome;
